@@ -22,7 +22,7 @@ public class CrazyDigitalPainting {
 		//   colors[i][j] = new Color(i % 256, (i * j) % 256, j % 256);
 		for(int i = 0; i<colors.length;i++) {
 			for(int j = 0; j < colors[i].length; j++) {
-				colors[i][j] = new Color(Math.abs(Math.sin((i/600) * (2*Math.PI)), (i * j)% 256, j %256);
+				colors[i][j] = new Color(Math.round(Math.abs(Math.sin((i/600.0) * (2.0*Math.PI)))) % 256, Math.round(Math.abs(Math.sin(((i * j)/600.0) * (2.0*Math.PI)))) % 256, Math.round(Math.abs(Math.sin((j/600.0) * (2.0*Math.PI)))) % 256);
 			}
 		}
 		//5. Come up with your own pattern to make a cool crazy image.
@@ -32,6 +32,6 @@ public class CrazyDigitalPainting {
 	}
 	
 	public static void main(String[] args) {
-		new CrazyDigitalPainting();
+		ColorArrayDisplayer.displayColorsAsImage(new CrazyDigitalPainting().colors);
 	}
 }
