@@ -24,6 +24,8 @@ public class MazeMaker{
 		//4. select a random cell to start
 		Random random = new Random();
 		
+		maze.getCell(0, random.nextInt(h)).setWestWall(false);
+		maze.getCell(w - 1, random.nextInt(h)).setEastWall(false);
 		
 		//5. call selectNextPath method with the randomly selected cell
 		selectNextPath(maze.getCell(random.nextInt(w), random.nextInt(h)));
@@ -104,12 +106,13 @@ public class MazeMaker{
 		ArrayList<Cell> uVNeighbors = new ArrayList<>();
 		for(int i = -1; i <= 1; i++) {
 			for(int j = -1; j <= 1; j++) {
-				if(i != 0 && j != 0) {
+				if(!(i == 0 && j == 0) && (i == 0 || j == 0)) {
 					try{
-						uVNeighbors.add(maze.getCell(c.getX() + i, c.getY() + j));
+						if(!maze.getCell(c.getX() + i, c.getY() + j).hasBeenVisited()) {
+							uVNeighbors.add(maze.getCell(c.getX() + i, c.getY() + j));
+						}
 					}
 					catch(Exception e) {
-						
 					}
 				}
 			}
